@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
-import { useParams } from "react-router-dom"
+import React, { useState } from "react"
 
 function Pagination({ setCurrentPage, numPage, currentPage }) {
   let [pageNumber] = useState(1)
@@ -22,7 +20,7 @@ function Pagination({ setCurrentPage, numPage, currentPage }) {
     <>
       <ul className="pagination">
         {numPage ? (
-          <li className={`page-item ` + `${currentPage == 1 ? "disabled" : ""}`}>
+          <li className={`page-item ` + `${currentPage === 1 ? "disabled" : ""}`}>
             <a onClick={handlePrivious} className="page-link">
               Previous
             </a>
@@ -32,7 +30,7 @@ function Pagination({ setCurrentPage, numPage, currentPage }) {
         )}
         {[...Array(numPage)].map((i, index) => {
           return (
-            <li key={index} className={`page-item ` + `${currentPage == pageNumber ? "active" : ""}`}>
+            <li key={index} className={`page-item ` + `${currentPage === pageNumber ? "active" : ""}`}>
               <a
                 onClick={e => {
                   handleClick(e)
@@ -46,7 +44,7 @@ function Pagination({ setCurrentPage, numPage, currentPage }) {
         })}
 
         {numPage ? (
-          <li className={`page-item ` + `${currentPage == numPage ? "disabled" : ""}`}>
+          <li className={`page-item ` + `${currentPage === numPage ? "disabled" : ""}`}>
             <a onClick={handleNext} className="page-link" href="#">
               Next
             </a>
