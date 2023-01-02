@@ -43,7 +43,7 @@ function Table({ searchInput }) {
     setNumberOfPages(Math.ceil(tableData.length / recordsPerPage))
   }, [tableData])
   function handleDeleteInTable(elementToRemove) {
-    const data = tableData.filter(d => d.email != elementToRemove)
+    const data = tableData.filter(d => d.email !== elementToRemove)
     setTableData(data)
     setSearchData(data)
   }
