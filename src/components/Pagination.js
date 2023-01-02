@@ -2,23 +2,20 @@ import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { useParams } from "react-router-dom"
 
-function Pagination({ setCurrentPage, numPage }) {
+function Pagination({ setCurrentPage, numPage, currentPage }) {
   let [pageNumber] = useState(1)
-  const [currentPage, setCurrentPageNumber] = useState()
+
   function handleClick(e) {
     let page = Number(e.target.innerHTML)
     setCurrentPage(page)
-    setCurrentPageNumber(page)
   }
   function handleNext() {
     let page = currentPage + 1
     setCurrentPage(page)
-    setCurrentPageNumber(page)
   }
   function handlePrivious() {
     let page = currentPage - 1
     setCurrentPage(page)
-    setCurrentPageNumber(page)
   }
 
   return (
@@ -35,7 +32,7 @@ function Pagination({ setCurrentPage, numPage }) {
         )}
         {[...Array(numPage)].map((i, index) => {
           return (
-            <li key={index} className="page-item">
+            <li key={index} className={`page-item ` + `${currentPage == pageNumber ? "active" : ""}`}>
               <a
                 onClick={e => {
                   handleClick(e)

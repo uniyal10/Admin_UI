@@ -20,11 +20,8 @@ function Row({ rowData, handleDeleteInTable, checkedAll, setSelectedData }) {
   }
   function handleSave() {
     setEdit(false)
-    // console.log("handle save")
   }
   function handleDelete(e) {
-    // console.log(e.target)
-
     const elementToRemove = e.target.parentNode.parentNode.parentNode.childNodes[2].children[0].value
     handleDeleteInTable(elementToRemove)
   }
@@ -37,10 +34,9 @@ function Row({ rowData, handleDeleteInTable, checkedAll, setSelectedData }) {
     setChecked(check)
     if (check) setSelectedData(prev => [...prev, selectedRow.children[2].children[0].value])
     else {
-      //  console.log(selectedRow.children[2].children[0].value)
       setSelectedData(prev => {
         const index = prev.indexOf(selectedRow.children[2].children[0].value)
-        //  console.log(Number(index))
+
         return [...prev.slice(0, index), ...prev.slice(index + 1)]
       })
     }
@@ -65,9 +61,9 @@ function Row({ rowData, handleDeleteInTable, checkedAll, setSelectedData }) {
           <input className={!isEdit ? "input_edit" : ""} disabled={!isEdit ? "disabled" : ""} onChange={e => setRole(e.target.value)} type="text" value={role} />{" "}
         </td>
         <td>
-          <span>{!isEdit ? <i onClick={handleEdit} className="fa-solid fa-pen-to-square"></i> : <i onClick={handleSave} class="fa-solid fa-floppy-disk"></i>}</span>
+          <span>{!isEdit ? <i onClick={handleEdit} style={editStyle} className="fa-solid fa-pen-to-square"></i> : <i onClick={handleSave} style={saveStyle} class="fa-solid fa-floppy-disk"></i>}</span>
           <span>
-            <i onClick={handleDelete} className="fa-solid fa-trash"></i>
+            <i onClick={handleDelete} style={deleteStyle} className="fa-solid fa-trash"></i>
           </span>
         </td>
       </tr>
@@ -75,4 +71,16 @@ function Row({ rowData, handleDeleteInTable, checkedAll, setSelectedData }) {
   )
 }
 
+const deleteStyle = {
+  color: "#eb5055",
+  cursor: "pointer"
+}
+const editStyle = {
+  color: "#6368f7",
+  cursor: "pointer"
+}
+const saveStyle = {
+  color: "#7ff09b",
+  cursor: "pointer"
+}
 export default Row

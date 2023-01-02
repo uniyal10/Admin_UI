@@ -12,6 +12,10 @@ a:hover {
   cursor: pointer;
 }
 
+input {
+  background-color: white;
+}
+
 input[type="checkbox"]:hover {
   cursor: pointer;
 }

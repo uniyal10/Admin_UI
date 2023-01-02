@@ -17,12 +17,10 @@ function Table({ searchInput }) {
     function fetchData() {
       Axios.get("https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json")
         .then(function (response) {
-          //setCurrentRecords(response.data.slice(1 * 10 - 10, 1 * 10))
           setTableData(response.data)
           setSearchData(response.data)
 
           setNumberOfPages(Math.ceil(response.data.length / recordsPerPage))
-          //setCurrentPageNumber(1)
         })
         .catch(function (err) {
           console.log(err)
@@ -32,34 +30,28 @@ function Table({ searchInput }) {
   }, [])
 
   useEffect(() => {
-    // console.log(searchData)
     let searchdata = searchData.filter(data => {
-      return data.name.includes(searchInput)
+      return data.name.toLowerCase().includes(searchInput.toLowerCase()) || data.email.toLowerCase().includes(searchInput.toLowerCase()) || data.role.toLowerCase().includes(searchInput.toLowerCase())
     })
-    // console.log(searchdata)
     setTableData(searchdata)
     setNumberOfPages(Math.ceil(tableData.length / recordsPerPage))
+    setCurrentPage(1)
   }, [searchInput])
 
   useEffect(() => {
-    //console.log(tableData)
     setCurrentPageNumber(currentPage)
     setNumberOfPages(Math.ceil(tableData.length / recordsPerPage))
   }, [tableData])
   function handleDeleteInTable(elementToRemove) {
-    // console.log(elementToRemove)
     const data = tableData.filter(d => d.email != elementToRemove)
-    //console.log(data)
     setTableData(data)
     setSearchData(data)
   }
   function setCurrentPageNumber(page) {
     setCurrentPage(page)
-    //console.log(page * recordsPerPage - 10)
-    // console.log(page * recordsPerPage)
+
     setCurrentRecords(tableData.slice(page * 10 - 10, page * 10))
     setCheckedAll(false)
-    //console.log(currentRecords)
   }
 
   function handleSelectAll(e) {
@@ -107,7 +99,7 @@ function Table({ searchInput }) {
           <button onClick={handleDeleteSelected} className="btn btn-danger">
             Delete selected
           </button>
-          <Pagination setCurrentPage={setCurrentPageNumber} numPage={NumberOfPages} />
+          <Pagination setCurrentPage={setCurrentPageNumber} numPage={NumberOfPages} currentPage={currentPage} />
         </div>
       </div>
     </>
