@@ -61,7 +61,7 @@ function Table({ searchInput }) {
     let selectedData = []
     if (ischecked) {
       currentRecords.map(data => {
-        selectedData.push(data.email)
+        return selectedData.push(data.email)
       })
       setSelectedData(selectedData)
     } else {
