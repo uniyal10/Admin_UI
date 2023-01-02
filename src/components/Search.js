@@ -1,10 +1,10 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 
-function ComponentName() {
+function ComponentName({ setSearch }) {
   return (
     <>
       <div className="container">
-        <input className="search_input" type="text" />
+        <input on onChange={e => setSearch(e.target.value)} className="search_input" type="text" />
       </div>
     </>
   )

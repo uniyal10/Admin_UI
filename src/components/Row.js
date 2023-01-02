@@ -20,7 +20,7 @@ function Row({ rowData, handleDeleteInTable, checkedAll, setSelectedData }) {
   }
   function handleSave() {
     setEdit(false)
-    console.log("handle save")
+    // console.log("handle save")
   }
   function handleDelete(e) {
     // console.log(e.target)
@@ -37,10 +37,10 @@ function Row({ rowData, handleDeleteInTable, checkedAll, setSelectedData }) {
     setChecked(check)
     if (check) setSelectedData(prev => [...prev, selectedRow.children[2].children[0].value])
     else {
-      console.log(selectedRow.children[2].children[0].value)
+      //  console.log(selectedRow.children[2].children[0].value)
       setSelectedData(prev => {
         const index = prev.indexOf(selectedRow.children[2].children[0].value)
-        console.log(Number(index))
+        //  console.log(Number(index))
         return [...prev.slice(0, index), ...prev.slice(index + 1)]
       })
     }
@@ -51,7 +51,7 @@ function Row({ rowData, handleDeleteInTable, checkedAll, setSelectedData }) {
       <tr>
         <th scope="row">
           {" "}
-          <input type="checkbox" onClick={handleSelectedData} checked={checked}></input>{" "}
+          <input type="checkbox" onChange={handleSelectedData} checked={checked}></input>{" "}
         </th>
         <td>
           {" "}
